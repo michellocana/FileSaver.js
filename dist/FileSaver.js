@@ -83,12 +83,10 @@
       evt.initMouseEvent('click', true, true, window, 0, 0, 0, 80, 20, false, false, false, false, 0, null);
       node.dispatchEvent(evt);
     }
-  } // Detect WebView inside a native macOS app by ruling out all browsers
-  // We just need to check for 'Safari' because all other browsers (besides Firefox) include that too
-  // https://www.whatismybrowser.com/guides/the-latest-user-agent/macos
+  } // Detect WebKit inside a native macOS app
 
 
-  var isMacOSWebView = /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent);
+  var isWebKit = /AppleWebKit(?!.+Chrome)/.test(navigator.userAgent);
   var saveAs = _global.saveAs || ( // probably in some web worker
   typeof window !== 'object' || window !== _global ? function saveAs() {}
   /* noop */
